@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "email": "john19@hotmail.com",
+    "password": "password123",
+    "dob": null
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "email": "john19@hotmail.com",
+    "password": "password123",
+    "dob": null
+  },
+  {
+    "id": 3,
+    "name": "John",
+    "email": "john19@hotmail.com",
+    "password": "password123",
+    "dob": null
+  },
+  {
+    "id": 4,
+    "name": "John",
+    "email": "john19@hotmail.com",
+    "password": "password123",
+    "dob": null
+  }
+]
