@@ -1,13 +1,7 @@
 from typing import Optional
 from pydantic import BaseModel
 from database.database import Database
-
-class UserSchema(BaseModel):
-    id: int
-    name: str
-    email: str
-    password: str
-    dob: Optional[int]
+from schemas.user import UserSchema
 
 
 class User:
@@ -29,3 +23,6 @@ class User:
             raise ValueError
         
         return result
+    
+    def create(self, user: UserSchema) -> None:
+        self._database.createUser(user)

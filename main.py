@@ -1,7 +1,10 @@
 import json
 import time
+import uuid
 
-from users import User, UserSchema
+from schemas.user import UserSchema
+from users import User
+
 
 
 class SmartHome:
@@ -21,6 +24,7 @@ class SmartHome:
             ''')
             try:
                 choice = int(input('Choose option: '))
+                valid_choice = True
                 if choice == 1:
                     self.login()
                 else:
@@ -46,9 +50,9 @@ class SmartHome:
             self.user_data = self.current_user.get(self.user_id)
         except:
             print('Unable to retrieve data')
-            # self.create()
+            self.create(email, password)
 
-        # self.main_menu()
+        self.main()
 
 
     def signUp(self):
@@ -56,13 +60,59 @@ class SmartHome:
         while True:
             email = input('Enter your email: ')
             password = input('Enter your passowrd: ')
-            confirm_password = input('Confirm your password')
-            if(password is not confirm_password):
+            confirm_password = input('Confirm your password: ')
+            if(password != confirm_password):
+                print("\n\nPassword do not match")
+                continue
+            else:
+                break
+                
+        self.create(email, password)
+
+    def create(self, email, password):
+        name = input("Enter your name: ")
+        user_id = uuid.uuid4().int
+
+        user = UserSchema(
+            id=user_id,
+            name=name,
+            email=email,
+            password=password,
+            dob=None
+        )
+
+        self.current_user.create(user)
+        self.user_data = self.current_user.get(user_id)
+
+        self.main()
+
+    def main(self):
+        while True:
+            print(
+            """
+            Main Menu
+            1. Option 1
+            2. Option 2
+            """
+            )
+            try:
+                choice = int(input("\n\nChoose option: "))
+                break
+            except:
+                print("\nInvalid choice. Try again.")
                 continue
 
-            # self.create()
+        if(choice == 1):
+            print('opt 1')
+
+        elif(choice == 2):
+            print('opt 2')
+        else:
+            print('Not one of our options.')
+              
 
         
 
-
-                
+if __name__ == "__main__":
+    app = SmartHome()
+    app.start()   
