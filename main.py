@@ -103,11 +103,56 @@ class SmartHome:
                 print("\nInvalid choice. Try again.")
                 continue
 
-        print(choice)
+        if(choice == 2):
+            self.pick_appliance()
+        else:
+            print('Not one of our options. Exiting.')
 
         self.main()
   
 
+    def pick_appliance(self):
+        
+        while True:
+            print("""
+            What appliance would you like to schedule?
+            1. Thermostat
+            2. Lighting
+            3. Other smart
+            """)
+            user_input = input("Please enter a number ")
+            try:
+                choice = int(user_input)
+                break
+            except:
+                print('Not valid input')
+                continue
+
+        if(choice == 1):
+            temp = int(input('What temperature would you like to set? '))
+            date_string = input('When would you like to schedule this change? (dd/mm/yyyy hh:mm) Or enter for right now')
+            date = datetime.now()
+            if(date_string != ''):
+                date = datetime.strptime(date_string, "%d/%m/%Y %H:%M")
+            time.sleep(1)
+            print(f'\nSetting thermostat to {temp} on {date}')
+
+        elif(choice == 2):
+            lights = input('What lights would you like turned on? ')
+            off_lights = input('What lights would you like turned off? ')
+
+            print(f'Turning on {lights} and turning off {off_lights}')
+    
+        else:
+            des = input('Please describe what you would like to do ')
+            print(f"Completing: ${des}")
+            time.sleep(1)
+            print('\nTasks completed') 
+
+
+
+
+            
 
 if __name__ == "__main__":
     app = SmartHome()
