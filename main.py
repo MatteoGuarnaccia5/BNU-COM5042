@@ -103,11 +103,37 @@ class SmartHome:
                 print("\nInvalid choice. Try again.")
                 continue
 
-        print(choice)
+        if(choice == 1):
+            self.send_alert()
+
+        else:
+            print('Not one of our options. Exiting.')
 
         self.main()
-  
+              
 
+    # emergency alert
+    def send_alert(self):
+        print('This is a test simulation of the emergency alert system')
+    
+        fire_alarm_active = self.get_alarm_status()
+        while fire_alarm_active:
+            print('Alert! There is a fire please evacuate')
+            time.sleep(5)
+            fire_alarm_active = self.get_alarm_status()
+        
+    
+    def get_alarm_status(self):
+        response = requests.get("https://jsonplaceholder.typicode.com/posts")
+        if(response.status_code == 200):
+            return True
+        else:
+            return False
+        
+
+
+
+        
 
 if __name__ == "__main__":
     app = SmartHome()
