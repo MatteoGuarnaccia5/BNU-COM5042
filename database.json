@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "John",
+    "email": "john19@hotmail.com",
+    "password": "password123",
+    "dob": null
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "email": "doifof@hotmail.com",
+    "password": "lwe;fewoifjwepj",
+    "dob": null
+  },
+  {
+    "id": 3,
+    "name": "John",
+    "email": "'pdfopergf'@hotmail.com",
+    "password": "'fjew[jfwe[f'",
+    "dob": null
+  },
+  {
+    "id": 4,
+    "name": "John",
+    "email": "'oifjf'@hotmail.com",
+    "password": "eopfje[rew",
+    "dob": null
+  },
+  {
+    "id": 98690107359108348103105334638187012446,
+    "name": "callum",
+    "email": "callum@gmail.com",
+    "password": "lee4life",
+    "dob": null
+  }
+]
