@@ -103,14 +103,12 @@ class SmartHome:
                 except:
                     print("\nInvalid choice. Try again.")
                     continue
-
-            print(choice)
         
-                if(choice == 1):
-                    self.alert_function_1()
+            if(choice == 1):
+                self.alert_function_1()
 
-                else:
-                    print('Not one of our options. Exiting.')
+            else:
+                print('Not one of our options. Exiting.')
         except:
             print("Invalid input. Please try again")
 
