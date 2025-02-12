@@ -105,7 +105,7 @@ class SmartHome:
                     continue
         
             if(choice == 1):
-                self.alert_function_1()
+                self.send_alert()
 
             else:
                 print('Not one of our options. Exiting.')
@@ -115,19 +115,19 @@ class SmartHome:
         self.main()
         
   
-    def alert_function_1(self):
+    def send_alert(self):
         print('This is a test simulation of the emergency alert system')
 
-        x = self.alert_function_2()
-        while x:
+        fire_alarm_active = self.get_alarm_status()
+        while fire_alarm_active:
             print('Alert! There is a fire please evacuate')
             time.sleep(5)
-            x = self.alert_function_2()
+            fire_alarm_active = self.get_alarm_status()
             
 
-    def alert_function_2(self):
-        y = requests.get("https://jsonplaceholder.typicode.com/posts")
-        return y.status_code == 200
+    def get_alarm_status(self):
+        response = requests.get("https://jsonplaceholder.typicode.com/posts")
+        return response.status_code == 200
 
 
 if __name__ == "__main__":
