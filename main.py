@@ -129,10 +129,7 @@ class SmartHome:
 
     def alert_function_2(self):
         y = requests.get("https://jsonplaceholder.typicode.com/posts")
-        if(y.status_code == 200):
-            return True
-        else:
-            return False
+        return y.status_code == 200
 
 
 if __name__ == "__main__":
