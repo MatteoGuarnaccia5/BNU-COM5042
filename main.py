@@ -112,7 +112,7 @@ class SmartHome:
                 else:
                     print('Not one of our options. Exiting.')
         except:
-            print("Error")
+            print("Invalid input. Please try again")
 
         self.main()
         
