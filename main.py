@@ -147,25 +147,30 @@ class SmartHome:
                 continue
 
         if(choice == 1):
-            temp = int(input('What temperature would you like to set? '))
-            date_string = input('When would you like to schedule this change? (dd/mm/yyyy hh:mm) Or enter for right now')
-            date = datetime.now()
-            if(date_string != ''):
-                date = datetime.strptime(date_string, "%d/%m/%Y %H:%M")
-            time.sleep(1)
-            print(f'\nSetting thermostat to {temp} on {date}')
+            self.manage_thermostat()
 
         elif(choice == 2):
-            lights = input('What lights would you like turned on? ')
-            off_lights = input('What lights would you like turned off? ')
-
-            print(f'Turning on {lights} and turning off {off_lights}')
+            self.manage_lights()
 
         else:
             des = input('Please describe what you would like to do ')
             print(f"Completing: ${des}")
             time.sleep(1)
-            print('\nTasks completed') 
+            print('\nTasks completed')
+            
+    def manage_thermostat(self):
+        temp = int(input('What temperature would you like to set? '))
+        date_string = input('When would you like to schedule this change? (dd/mm/yyyy hh:mm) Or enter for right now')
+        date = datetime.now()
+        if(date_string != ''):
+            date = datetime.strptime(date_string, "%d/%m/%Y %H:%M")
+        time.sleep(1)
+        print(f'\nSetting thermostat to {temp} on {date}')
+        
+    def manage_lights(self):
+        lights = input('What lights would you like turned on? ')
+        off_lights = input('What lights would you like turned off? ')
+        print(f'Turning on {lights} and turning off {off_lights}')
             
             
 if __name__ == "__main__":
