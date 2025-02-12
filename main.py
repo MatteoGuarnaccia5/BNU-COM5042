@@ -106,7 +106,6 @@ class SmartHome:
 
             print(choice)
         
-            if(choice):
                 if(choice == 1):
                     self.alert_function_1()
 
