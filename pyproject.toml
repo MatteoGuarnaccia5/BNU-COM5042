@@ -1,0 +1,35 @@
+[project]
+name = "BNU-COM5042"
+description = "Smart Home App."
+readme = "README.md"
+requires-python = ">=3.12"
+version = "1.0.0"
+
+dependencies = [
+    "fastapi[all]==0.115.5",
+]
+
+[project.urls]
+"Repository" = "https://github.com/MatteoGuarnaccia5/BNU-COM5042"
+
+
+[project.optional-dependencies]
+code-analysis = [
+    "black==24.10.0",
+    "pylint==3.3.1"
+]
+
+test = [
+    "pytest==8.3.3",
+    "pytest-asyncio==0.24.0",
+    "pytest-cov==6.0.0",
+    "pytest-env==1.1.5"
+]
+
+scripts = [
+    "faker==33.0.0",
+    "requests==2.32.3"
+]
+
+[tool.setuptools]
+packages = ["BNU-COM5042"]

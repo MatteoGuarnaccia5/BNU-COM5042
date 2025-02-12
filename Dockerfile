@@ -1,7 +1,7 @@
 FROM python:3.11
 
 WORKDIR /app
-COPY all_code.py ./app.py
+COPY main.py ./app.py
 
 EXPOSE 8080
 
