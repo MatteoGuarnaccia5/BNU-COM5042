@@ -88,25 +88,46 @@ class SmartHome:
         self.main()
 
     def main(self):
-        while True:
-            print(
-            """
-            Main Menu
-            1. Emergency Alerts
-            2. Energy Efficiency
-            """
-            )
-            try:
-                choice = int(input("\n\nChoose option: "))
-                break
-            except:
-                print("\nInvalid choice. Try again.")
-                continue
+        try:
+            while True:
+                print(
+                """
+                Main Menu
+                1. Emergency Alerts
+                2. Energy Efficiency
+                """
+                )
+                try:
+                    choice = int(input("\n\nChoose option: "))
+                    break
+                except:
+                    print("\nInvalid choice. Try again.")
+                    continue
+        
+            if(choice == 1):
+                self.send_alert()
 
-        print(choice)
+            else:
+                print('Not one of our options. Exiting.')
+        except:
+            print("Invalid input. Please try again")
 
         self.main()
+        
   
+    def send_alert(self):
+        print('This is a test simulation of the emergency alert system')
+
+        fire_alarm_active = self.get_alarm_status()
+        while fire_alarm_active:
+            print('Alert! There is a fire please evacuate')
+            time.sleep(5)
+            fire_alarm_active = self.get_alarm_status()
+            
+
+    def get_alarm_status(self):
+        response = requests.get("https://jsonplaceholder.typicode.com/posts")
+        return response.status_code == 200
 
 
 if __name__ == "__main__":
