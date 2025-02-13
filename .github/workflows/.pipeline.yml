@@ -1,13 +1,13 @@
 name: CD
 on:
   workflow_dispatch:
-  pull_request:
   push:
     branches:
       - main
 
 jobs:
-  - job: buildImageAndDeploy
+  buildImageAndDeploy:
+    name: BuildImageAndDeploy
     timeoutInMinutes: 5
     steps:
       - checkout: self

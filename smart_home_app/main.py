@@ -1,21 +1,23 @@
+'''Root of the Smart Home App'''
+from datetime import datetime
+
 import time
 import uuid
 import requests
-from datetime import datetime
 
-from schemas.user import UserSchema
-from users import User
+from smart_home_app.schemas.user import UserSchema
+from smart_home_app.users import User
 
 
 
 class SmartHome:
-    
+    '''THe SmartHomeApp class'''
     def __init__(self) -> None:
-        # self.user_id = None
         self.current_user = User()
         self.user_data: UserSchema | None = None
 
     def start(self):
+        '''Root of the app'''
         valid_choice = False
         while not valid_choice:
             print('''
@@ -29,17 +31,18 @@ class SmartHome:
                 if choice == 1:
                     self.login()
                 else:
-                    self.signUp()
-            except:
+                    self.sign_up()
+            except TypeError:
                 continue
 
     def login(self):
+        '''Log user in'''
         email = input('Enter your email: ')
         password = input('Enter your passowrd: ')
 
         try:
-            self.user_id = self.current_user.authenticate(email, password)
-        except:
+            user_id = self.current_user.authenticate(email, password)
+        except ValueError:
             print('Unable to authenticate\n\n')
             time.sleep(2)
             self.start()
@@ -48,29 +51,30 @@ class SmartHome:
         time.sleep(1)
 
         try:
-            self.user_data = self.current_user.get(self.user_id)
-        except:
+            self.user_data = self.current_user.get(user_id)
+        except ValueError:
             print('Unable to retrieve data')
             self.create(email, password)
 
         self.main()
 
 
-    def signUp(self):
+    def sign_up(self):
+        '''Method to sign up new user'''
 
         while True:
             email = input('Enter your email: ')
             password = input('Enter your passowrd: ')
             confirm_password = input('Confirm your password: ')
-            if(password != confirm_password):
+            if password != confirm_password:
                 print("\n\nPassword do not match")
                 continue
-            else:
-                break
-                
+            break
+
         self.create(email, password)
 
     def create(self, email, password):
+        '''Create new user document'''
         name = input("Enter your name: ")
         user_id = uuid.uuid4().int
 
@@ -88,6 +92,7 @@ class SmartHome:
         self.main()
 
     def main(self):
+        '''Main menu of the app'''
         try:
             while True:
                 print(
@@ -100,23 +105,24 @@ class SmartHome:
                 try:
                     choice = int(input("\n\nChoose option: "))
                     break
-                except:
+                except TypeError:
                     print("\nInvalid choice. Try again.")
                     continue
-        
-            if(choice == 1):
+
+            if choice == 1:
                 self.send_alert()
-            elif(choice == 2):
+            elif choice == 2:
                 self.pick_appliance()
             else:
                 print('Not one of our options. Exiting.')
-        except:
+        except TypeError:
             print("Invalid input. Please try again")
 
         self.main()
-        
-  
+
+
     def send_alert(self):
+        '''Send emergency alert'''
         print('This is a test simulation of the emergency alert system')
 
         fire_alarm_active = self.get_alarm_status()
@@ -124,13 +130,15 @@ class SmartHome:
             print('Alert! There is a fire please evacuate')
             time.sleep(5)
             fire_alarm_active = self.get_alarm_status()
-            
+
 
     def get_alarm_status(self):
-        response = requests.get("https://jsonplaceholder.typicode.com/posts")
+        '''Get the fire alarm status'''
+        response = requests.get("https://jsonplaceholder.typicode.com/posts", timeout=200)
         return response.status_code == 200
 
     def pick_appliance(self):
+        ''' Pick smart appliance'''
         while True:
             print("""
             What appliance would you like to schedule?
@@ -142,14 +150,14 @@ class SmartHome:
             try:
                 choice = int(user_input)
                 break
-            except:
+            except TypeError:
                 print('Not valid input')
                 continue
 
-        if(choice == 1):
+        if choice == 1:
             self.manage_thermostat()
 
-        elif(choice == 2):
+        elif choice == 2:
             self.manage_lights()
 
         else:
@@ -157,22 +165,27 @@ class SmartHome:
             print(f"Completing: ${des}")
             time.sleep(1)
             print('\nTasks completed')
-            
+
     def manage_thermostat(self):
+        '''Manage thermostat'''
         temp = int(input('What temperature would you like to set? '))
-        date_string = input('When would you like to schedule this change? (dd/mm/yyyy hh:mm) Or enter for right now')
+        date_string = input('''When would you like to schedule this change?
+                            (dd/mm/yyyy hh:mm) Or enter for right now''')
         date = datetime.now()
-        if(date_string != ''):
+        if date_string != '':
             date = datetime.strptime(date_string, "%d/%m/%Y %H:%M")
         time.sleep(1)
         print(f'\nSetting thermostat to {temp} on {date}')
-        
+
     def manage_lights(self):
+        '''Manage lights'''
         lights = input('What lights would you like turned on? ')
         off_lights = input('What lights would you like turned off? ')
         print(f'Turning on {lights} and turning off {off_lights}')
-            
-            
+
+
+
+
 if __name__ == "__main__":
     app = SmartHome()
-    app.start()   
+    app.start()
