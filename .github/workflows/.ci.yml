@@ -29,7 +29,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run pylint
-        run: pylint $(git ls-files '*.py')
+        run: python -m pylint smart_home_app test
 
   unit-tests:
     name: Unit Tests
