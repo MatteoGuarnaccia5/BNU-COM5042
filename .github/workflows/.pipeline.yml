@@ -1,6 +1,7 @@
 name: CD
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -10,15 +11,15 @@ jobs:
     name: BuildImageAndDeploy
     timeoutInMinutes: 5
     steps:
-      - checkout: self
-      - task: Bash@3
-        inputs:
-          filePath: pipeline/build.sh
-          workingDirectory: $(Build.SourcesDirectory)/services/aqueduct_artiq_data_processing
-          displayName: "Build Image"
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - task: Bash@3
-        inputs:
-          filePath: pipeline/deploy.prod.sh
-          workingDirectory: $(Build.SourcesDirectory)/services/aqueduct_artiq_data_processing
-          displayName: "Pod deployments"
+      - name: Build Image
+        run: |
+          chmod +x ./pipeline/build.sh
+          ./pipeline/build.sh
+
+      - name: Deploy instance
+        run: |
+          chmod +x ./pipeline/deploy.prod.sh
+          ./pipeline/deploy.prod.sh
