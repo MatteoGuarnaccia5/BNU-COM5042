@@ -9,7 +9,6 @@ on:
 jobs:
   buildImageAndDeploy:
     name: BuildImageAndDeploy
-    timeoutInMinutes: 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
