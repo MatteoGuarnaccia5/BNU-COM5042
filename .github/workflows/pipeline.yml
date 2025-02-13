@@ -9,6 +9,7 @@ on:
 jobs:
   buildImageAndDeploy:
     name: BuildImageAndDeploy
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
