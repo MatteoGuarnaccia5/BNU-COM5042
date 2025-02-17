@@ -1,0 +1,23 @@
+[MASTER]
+ignore=CVS,tests
+persistent=yes
+load-plugins=
+
+[MESSAGES CONTROL]
+disable=C0111,R0903,C0103,W0621,W0212,E0401
+
+[REPORTS]
+output-format=text
+reports=no
+evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
+
+[BASIC]
+good-names=i,j,k,ex,Run,_
+bad-names=foo,bar,baz,toto,tutu,tata
+
+[FORMAT]
+max-line-length=100
+ignore-long-lines=^\s*(# )?<?https?://\S+>?$
+single-line-if-stmt=no
+max-module-lines=2000
+indent-after-paren=4
